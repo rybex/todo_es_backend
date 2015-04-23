@@ -1,26 +1,37 @@
 class TodoWritesController < ApplicationController
 
   def create_list
-    respond_to do |format|
-      format.json  { render :json => "list created" }
-    end
+    command = Todo::Commands::CreateTodoList.new(params)
+    execute(command)
+    head :ok
   end
 
   def remove_list
-    respond_to do |format|
-      format.json  { render :json => "list removed" }
-    end
+    command = Todo::Commands::RemoveTodoList.new(params)
+    execute(command)
+    head :ok
   end
 
   def add_todo_item
-    respond_to do |format|
-      format.json  { render :json => "item added" }
-    end
+    command = Todo::Commands::AddItemToList.new(params)
+    execute(command)
+    head :ok
   end
 
   def remove_todo_item
-    respond_to do |format|
-      format.json  { render :json => "item removed" }
-    end
+    command = Todo::Commands::RemoveItem.new(params)
+    execute(command)
+    head :ok
   end
+
+  private
+
+  def execute(command)
+    handler.execute(command)
+  end
+
+  def handler
+    @handler ||= Todo::CommandHandler.new
+  end
+
 end
