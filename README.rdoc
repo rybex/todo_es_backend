@@ -1,28 +1,54 @@
-== README
+## Setup
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Prepare DB:
 
-Things you may want to cover:
+```
+rake db:setup
+```
 
-* Ruby version
+## Run it
 
-* System dependencies
+```
+rails s
+```
 
-* Configuration
+## JSON test
 
-* Database creation
+```
+# Method:   POST
+# Endpoint: http://localhost:3000/todo_write/create_list
+# Headers:  Content-Type: application/json
+# Body:
+    {"title": "test"}
+```
 
-* Database initialization
+```
+# Method:   POST
+# Endpoint: http://localhost:3000/todo_write/add_todo_item
+# Headers:  Content-Type: application/json
+# Body:
+    {"todo_list_id": "#{proper_list_id}", "type": "test", "title": "I have to do something with ES"}
+```
 
-* How to run the test suite
+```
+# Method:   DELETE
+# Endpoint: http://localhost:3000/todo_write/remove_list
+# Headers:  Content-Type: application/json
+# Body:
+    {"title": "test"}
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+# Method:   DELETE
+# Endpoint: http://localhost:3000/todo_write/remove_todo_item
+# Headers:  Content-Type: application/json
+# Body:
+    {"todo_list_id": "#{proper_list_id}", "item_id": "#{proper_item_id}"}
+```
 
-* Deployment instructions
+```
+# Method:   GET
+# Endpoint: http://localhost:3000/todo_read/list?id=#{proper_list_id}
+# Headers:  Content-Type: application/json
+```
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
