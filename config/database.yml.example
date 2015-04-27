@@ -4,7 +4,6 @@ development:
   encoding: unicode
   database: todo_development
   pool: 5
-  username: tomek
 
 test:
   adapter: postgresql
@@ -12,4 +11,3 @@ test:
   encoding: unicode
   database: todo_test
   pool: 5
-  username: tomek
