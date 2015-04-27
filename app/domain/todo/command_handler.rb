@@ -2,18 +2,16 @@ module Todo
   class CommandHandler
 
     def initialize
-      @command_observers = [
-          Services::AddItemToList.new,
-          Services::CreateTodoList.new,
-          Services::RemoveItem.new,
-          Services::RemoveTodoList.new
-      ]
+      @command_observers = {
+          'AddItemToList'   => Services::AddItemToList.new,
+          'CreateTodoList'  => Services::CreateTodoList.new,
+          'RemoveItem'      => Services::RemoveItem.new,
+          'RemoveTodoList'  => Services::RemoveTodoList.new
+      }
     end
 
     def execute(command)
-      command_observers.each do |observer|
-        observer.call(command)
-      end
+      command_observers[command.class.name.demodulize].call(command)
     end
 
     private
