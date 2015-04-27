@@ -8,6 +8,7 @@ gem 'virtus'
 gem 'pg'
 gem 'rack-cors'
 gem 'sqlite3'
+gem 'rails_event_store'
 
 group :development, :test do
   gem 'pry'
