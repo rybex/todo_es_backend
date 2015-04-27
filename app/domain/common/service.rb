@@ -2,7 +2,6 @@ module Service
   include Todo::StoreInjector
 
   def build(aggregate_id, aggregate_class)
-    binding.pry
     aggregate = aggregate_class.new(aggregate_id)
     events = load_events(aggregate.id)
     aggregate.apply(events)

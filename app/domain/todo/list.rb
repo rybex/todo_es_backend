@@ -30,7 +30,6 @@ module Todo
     end
 
     def remove_item(item_id)
-      binding.pry
       raise ItemNotExist unless item_exist?(item_id)
       data = { list_id: id, item_id: item_id }
       publish(Events::ItemRemoved.new({data: data}))
@@ -51,13 +50,12 @@ module Todo
     private
 
     def apply_item_added_to_list(event)
-      binding.pry
       item = ListItem.new(event.data)
       items << item
     end
 
     def apply_item_removed_from_list(event)
-      items.reject { |item| item.item_id == event.data.item_id }
+      items.reject! { |item| item.item_id == event.data[:item_id] }
     end
 
     def apply_list_created
