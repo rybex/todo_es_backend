@@ -7,4 +7,9 @@ Rails.application.routes.draw do
       delete  :remove_todo_item
     end
   end
+  resource :todo_read do
+    member do
+      get    :list
+    end
+  end
 end
